@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giải Pháp Quản Lý Nông Nghiệp Tự Động | AgriTech Solution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0b0c10;
+            --text-color: #c5c6c7;
+            --accent-color: #66fcf1; /* Cyan Neon */
+            --accent-dark: #45a29e;
+            --secondary-bg: #1f2833;
+            --card-bg: #151a21;
+            --gradient: linear-gradient(135deg, #1f2833 0%, #0b0c10 100%);
+            --font-main: 'Montserrat', sans-serif;
+            --font-tech: 'Roboto Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 15px auto 0;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-tech);
+        }
+
+        .btn:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px var(--accent-dark);
+        }
+
+        .btn-fill {
+            background: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        /* --- HEADER --- */
+/* --- HEADER CHỈNH SỬA --- */
+		header {
+			background: rgba(11, 12, 16, 0.95); /* Màu nền tối trong suốt */
+			padding: 15px 0;
+			position: fixed;
+			width: 100%;
+			top: 0;
+			z-index: 1000;
+			border-bottom: 1px solid rgba(102, 252, 241, 0.1); /* Đường viền neon mờ */
+			backdrop-filter: blur(10px); /* Hiệu ứng mờ kính hiện đại */
+		}
+
+		nav {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			height: 50px; /* Cố định chiều cao để căn giữa */
+		}
+
+		.logo {
+			font-size: 1.8rem;
+			font-weight: 700;
+			color: #fff;
+			font-family: var(--font-tech);
+			letter-spacing: 1px;
+			cursor: pointer;
+		}
+
+		.logo span { 
+			color: var(--accent-color); 
+		}
+
+		/* Chỉnh sửa danh sách Menu để đồng bộ */
+		.nav-links {
+			display: flex;
+			gap: 40px; /* Khoảng cách đều giữa các mục */
+			align-items: center; /* Căn giữa theo chiều dọc */
+			list-style: none;
+		}
+
+		.nav-links li {
+			position: relative;
+		}
+
+		.nav-links a {
+			font-size: 0.95rem;
+			font-weight: 600;
+			color: #c5c6c7;
+			text-transform: uppercase; /* Chữ in hoa đồng bộ */
+			letter-spacing: 1px;
+			font-family: var(--font-main);
+			padding: 5px 0;
+			position: relative;
+			transition: all 0.3s ease;
+		}
+
+		/* Hiệu ứng gạch chân Neon khi di chuột */
+		.nav-links a:not(.nav-btn)::after {
+			content: '';
+			position: absolute;
+			width: 0;
+			height: 2px;
+			bottom: 0;
+			left: 0;
+			background-color: var(--accent-color);
+			transition: width 0.3s ease;
+			box-shadow: 0 0 10px var(--accent-color);
+		}
+
+		.nav-links a:not(.nav-btn):hover {
+			color: #fff;
+		}
+
+		.nav-links a:not(.nav-btn):hover::after {
+			width: 100%;
+		}
+
+		/* Nút Liên Hệ: Đồng bộ chiều cao nhưng nổi bật hơn */
+		.nav-btn {
+			padding: 8px 25px !important;
+			border: 1px solid var(--accent-color);
+			border-radius: 4px; /* Bo góc nhẹ */
+			color: var(--accent-color) !important;
+			transition: all 0.3s ease;
+		}
+
+		.nav-btn:hover {
+			background: var(--accent-color);
+			color: #0b0c10 !important; /* Đổi màu chữ khi hover */
+			box-shadow: 0 0 15px rgba(102, 252, 241, 0.4);
+		}
+
+		/* Ẩn menu mobile trên desktop */
+		.menu-toggle {
+			display: none;
+			color: #fff;
+			font-size: 1.5rem;
+			cursor: pointer;
+		}
+
+		/* Responsive cho màn hình nhỏ */
+		@media (max-width: 768px) {
+			.nav-links {
+				display: none; /* Ẩn menu trên mobile để xử lý sau */
+			}
+			.menu-toggle {
+				display: block;
+			}
+		}
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(11, 12, 16, 0.8), rgba(11, 12, 16, 0.8)), url('https://images.unsplash.com/photo-1586771107445-d3ca888129ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content h1 span {
+            color: var(--accent-color);
+            text-shadow: 0 0 15px var(--accent-dark);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #c5c6c7;
+        }
+
+        /* --- ABOUT / VISION --- */
+        .about {
+            padding: 100px 0;
+            background: var(--bg-color);
+        }
+
+        .vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .vision-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 5px;
+            border: 1px solid var(--secondary-bg);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vision-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+        }
+
+        .vision-card i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .vision-card h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        /* --- TECH STACK (Layered Architecture) --- */
+        .tech {
+            padding: 100px 0;
+            background: var(--secondary-bg);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .tech-info h3 {
+            color: var(--accent-color);
+            font-family: var(--font-tech);
+            margin-bottom: 10px;
+        }
+
+        .tech-info h2 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .tech-item h4 { color: #fff; margin-bottom: 5px; }
+
+        .tech-visual {
+            background: #000;
+            height: 400px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--accent-dark);
+            box-shadow: 0 0 30px rgba(100, 255, 218, 0.1);
+            position: relative;
+        }
+        
+        .tech-visual::before {
+            content: "SYSTEM ARCHITECTURE";
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-family: var(--font-tech);
+            font-size: 0.8rem;
+            color: var(--accent-dark);
+        }
+        
+        /* Placeholder for tech diagram */
+        .diagram-box {
+            text-align: center;
+        }
+        .diagram-box i { font-size: 5rem; color: var(--accent-dark); opacity: 0.5; }
+
+        /* --- SOLUTIONS (Pricing) --- */
+        .solutions {
+            padding: 100px 0;
+            background: var(--bg-color);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .price-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--secondary-bg);
+            transition: 0.3s;
+        }
+
+        .price-card.featured {
+            border: 2px solid var(--accent-color);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.1);
+        }
+
+        .price-card h3 { color: #fff; font-size: 1.5rem; margin-bottom: 10px; }
+        .price-card .sub-text { font-family: var(--font-tech); color: var(--accent-color); margin-bottom: 30px; display: block;}
+        
+        .price-features {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .price-features li {
+            margin-bottom: 10px;
+            color: #a8b2d1;
+        }
+
+        .price-features li i {
+            color: var(--accent-color);
+            margin-right: 10px;
+        }
+
+        /* --- STATS / IMPACT --- */
+        .impact {
+            padding: 80px 0;
+            background: linear-gradient(rgba(100, 255, 218, 0.1), rgba(11, 12, 16, 0.9));
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .stat-item h2 {
+            font-size: 3rem;
+            color: #fff;
+            font-family: var(--font-tech);
+        }
+
+        .stat-item p { color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #050505;
+            padding: 50px 0 20px;
+            border-top: 1px solid #1f2833;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-col p { margin-bottom: 10px; font-size: 0.9rem; }
+        .footer-col i { margin-right: 10px; color: var(--accent-color); }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #1f2833;
+            font-size: 0.8rem;
+            font-family: var(--font-tech);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .tech-grid { grid-template-columns: 1fr; }
+            .pricing-grid { padding: 0 20px; }
+            .price-card.featured { transform: none; }
+            nav { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+	<header>
+		<div class="container">
+			<nav>
+				<div class="logo">AGRI<span>TECH</span>.AI</div>
+				
+				<ul class="nav-links">
+					<li><a href="#about">Về Chúng Tôi</a></li>
+					<li><a href="#tech">Công Nghệ</a></li>
+					<li><a href="#solutions">Giải Pháp</a></li>
+					<li><a href="#contact" class="nav-btn">Liên Hệ</a></li>
+				</ul>
+				
+				<div class="menu-toggle">
+					<i class="fas fa-bars"></i>
+				</div>
+			</nav>
+		</div>
+	</header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>GIẢI PHÁP PHẦN MỀM <br><span>QUẢN LÝ NÔNG NGHIỆP TỰ ĐỘNG</span></h1>
+            <p>Công nghiệp hóa quy trình canh tác - Số hóa quản trị rủi ro. 
+                Hệ sinh thái công nghệ kết hợp PLC chuẩn công nghiệp và Dữ liệu vệ tinh NASA.</p>
+            <a href="#solutions" class="btn btn-fill">Khám Phá Giải Pháp</a>
+            <a href="#tech" class="btn">Công Nghệ Lõi</a>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Sứ Mệnh & Tầm Nhìn</h2>
+            <div class="vision-grid">
+                <div class="vision-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Tầm Nhìn Quốc Gia</h3>
+                    <p>Kiến tạo hệ sinh thái nông nghiệp số 'Make in Vietnam', đưa công nghệ dự báo trở thành tiêu chuẩn bắt buộc cho nền nông nghiệp hiện đại.</p>
+                </div>
+                <div class="vision-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Quản Trị Rủi Ro</h3>
+                    <p>Chuyển đổi tư duy từ "Phản ứng sau thiên tai" sang "Chủ động phòng ngừa" nhờ dữ liệu lớn và AI.</p>
+                </div>
+                <div class="vision-card">
+                    <i class="fas fa-industry"></i>
+                    <h3>Chuẩn Hóa Công Nghiệp</h3>
+                    <p>Sử dụng thiết bị PLC bền bỉ thay thế vi mạch giá rẻ. Đảm bảo vận hành liên tục 24/7/365.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tech" class="tech">
+        <div class="container">
+            <h2 class="section-title">Cấu Trúc Công Nghệ</h2>
+            <div class="tech-grid">
+                <div class="tech-info">
+                    <h3>CÔNG NGHỆ 4 LỚP</h3>
+                    <h2>Sức Mạnh Của Sự Tích Hợp</h2>
+                    <div class="tech-list">
+                        <div class="tech-item">
+                            <i class="fas fa-server fa-2x" style="color: var(--accent-color)"></i>
+                            <div>
+                                <h4>Phần Cứng (Hardware Agnostic)</h4>
+                                <p>Hệ thống PLC S7-1200 chuẩn công nghiệp. Bền bỉ, ổn định, linh hoạt nâng cấp theo quy mô.</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-cloud fa-2x" style="color: var(--accent-color)"></i>
+                            <div>
+                                <h4>Cloud & IoT (Firebase)</h4>
+                                <p>Đồng bộ dữ liệu thời gian thực (Real-time). Quản lý "Không biên giới" đa điểm qua Internet.</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-brain fa-2x" style="color: var(--accent-color)"></i>
+                            <div>
+                                <h4>Trí Tuệ Nhân Tạo & NASA</h4>
+                                <p>Tích hợp API dữ liệu vệ tinh GMAO. Phân tích dự báo mưa bão để tự động bảo vệ tài sản.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-visual">
+                    <div class="diagram-box">
+                        <i class="fas fa-project-diagram"></i>
+                        <p style="margin-top: 20px; color: var(--accent-dark); font-family: var(--font-tech);">[ HỆ THỐNG TÍCH HỢP TOÀN DIỆN ]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solutions" class="solutions">
+        <div class="container">
+            <h2 class="section-title">Gói Giải Pháp</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>BASIC CONTROL</h3>
+                    <span class="sub-text">Tự Động Hóa Tại Chỗ</span>
+                    <ul class="price-features">
+                        <li><i class="fas fa-check"></i> Tủ điều khiển PLC cơ bản</li>
+                        <li><i class="fas fa-check"></i> Màn hình HMI cảm ứng</li>
+                        <li><i class="fas fa-check"></i> Vận hành bán tự động</li>
+                        <li><i class="fas fa-check"></i> Phù hợp: Nông hộ nhỏ</li>
+                    </ul>
+                    <a href="#" class="btn">Liên Hệ Báo Giá</a>
+                </div>
+
+                <div class="price-card featured">
+                    <div style="background: var(--accent-color); color: #000; padding: 5px; font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; border-radius: 4px;">KHUYÊN DÙNG CHO DOANH NGHIỆP</div>
+                    <h3>AI ENTERPRISE</h3>
+                    <span class="sub-text">Thông Minh Toàn Diện</span>
+                    <ul class="price-features">
+                        <li><i class="fas fa-check"></i> <strong>Tích hợp Dữ liệu NASA</strong></li>
+                        <li><i class="fas fa-check"></i> <strong>AI Dự báo rủi ro</strong></li>
+                        <li><i class="fas fa-check"></i> Điều khiển PLC Đa nhiệm</li>
+                        <li><i class="fas fa-check"></i> Quản lý tập trung trên Cloud</li>
+                        <li><i class="fas fa-check"></i> API tùy biến theo yêu cầu</li>
+                    </ul>
+                    <a href="#" class="btn btn-fill">Tư Vấn Chuyên Sâu</a>
+                </div>
+
+                <div class="price-card">
+                    <h3>REMOTE IOT</h3>
+                    <span class="sub-text">Quản Lý Từ Xa</span>
+                    <ul class="price-features">
+                        <li><i class="fas fa-check"></i> Module IoT Gateway</li>
+                        <li><i class="fas fa-check"></i> Web App & Mobile App</li>
+                        <li><i class="fas fa-check"></i> Giám sát 24/7 mọi lúc mọi nơi</li>
+                        <li><i class="fas fa-check"></i> Cảnh báo sự cố qua điện thoại</li>
+                    </ul>
+                    <a href="#" class="btn">Liên Hệ Báo Giá</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="impact">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h2>30-40%</h2>
+                    <p>Tiết kiệm Năng lượng & Nước</p>
+                </div>
+                <div class="stat-item">
+                    <h2>24/7</h2>
+                    <p>Vận hành liên tục bền bỉ</p>
+                </div>
+                <div class="stat-item">
+                    <h2>Zero</h2>
+                    <p>Độ trễ quản lý từ xa</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="logo">AGRI<span>TECH</span>.AI</div>
+                    <p style="margin-top: 20px; color: #8892b0;">
+                        Đối tác tin cậy cung cấp giải pháp chuyển đổi số nông nghiệp chuẩn công nghiệp hàng đầu Việt Nam.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên Hệ</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Đại Học Kinh Tế Kĩ Thuật Công Nghiệp Hà Nội</p>
+                    <p><i class="fas fa-phone"></i>03271739004 ( Phạm Văn Chung )</p>
+                    <p><i class="fas fa-envelope"></i>phamvanchung2k7@gmail.com</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Kết Nối</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/phamvanchung2127" style="color: #fff; margin-right: 15px;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.facebook.com/phamvanchung2127" style="color: #fff; margin-right: 15px;"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/phamvanchung2127" style="color: #fff;"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 AgriTech Solutions. All Rights Reserved. Designed for Future Agriculture.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
